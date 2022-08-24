@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Tag;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class PostController extends Controller
 
         $posts = Post::all();
 
-        return view("admin.posts.index", compact("posts"));
+        $tags = Tag::all();
+
+        return view("admin.posts.index", compact("posts" , "tags"));
 
 
     }

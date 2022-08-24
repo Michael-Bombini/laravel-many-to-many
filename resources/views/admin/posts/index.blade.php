@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="nav mb-4">
-            <a class="btn btn-primary" href="{{ route('admin.posts.create')}}">Add a new post</a>
+            <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">Add a new post</a>
         </div>
 
 
@@ -28,21 +28,36 @@
                                 <div class="col-6">
                                     {{ $post['created_at'] }}
                                 </div>
+                                <div class="col-12 my-3">
+                                    TAGS of this post : <br>
+                                    <ul>
+                                        @foreach ($post->tags as $tag)
+                                            <strong>
+                                                <li>
+                                                    {{ $tag->name }}
+                                                </li>
+                                            </strong>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-end pb-3">
-                            <a class="btn btn-success mx-2" href="{{ route('admin.posts.show', $post->id) }}"><i class="fa-solid fa-eye"></i></a>
-                            <a class="btn btn-primary mx-2" href="{{ route('admin.posts.edit', $post->id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-success mx-2" href="{{ route('admin.posts.show', $post->id) }}"><i
+                                    class="fa-solid fa-eye"></i></a>
+                            <a class="btn btn-primary mx-2" href="{{ route('admin.posts.edit', $post->id) }}"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                             <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger mx-2"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" class="btn btn-danger mx-2"><i
+                                        class="fa-solid fa-trash-can"></i></button>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
+        </div>
     </div>
 @endsection
