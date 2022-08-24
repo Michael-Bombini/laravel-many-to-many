@@ -34,7 +34,7 @@
                                         @foreach ($post->tags as $tag)
                                             <strong>
                                                 <li class="bg-primary d-inline-block px-2 py-1 rounded-pill">
-                                                    {{ $tag->name }}
+                                                   <a class="text-dark fw-bold" href="{{ route('admin.posts.filter', $tag->id)   }}"><strong>{{ $tag->name }}</strong></a> 
                                                 </li>
                                             </strong>
                                         @endforeach

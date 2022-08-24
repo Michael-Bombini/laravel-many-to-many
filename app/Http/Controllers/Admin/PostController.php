@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Tag;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,4 +113,36 @@ class PostController extends Controller
 
         return redirect()->route("admin.posts.index");
     }
+
+
+    public function filter($id)
+    {
+        /*
+
+
+        SELECT * from posts
+            join post_tag on
+            posts.id = post_tag.post_id
+            join tags ON
+            tags.id = post_tag.tag_id
+            WHERE tags.id = 4 ; (questo dovrebbe essere l'id che ottengo cliccando sul tag che passo come parametro ossia $id)  
+
+
+        */
+
+        $posts = DB::table('posts')
+        ->join('post_tag' , 'posts.id' , '=' , 'post_tag.post_id')
+        ->join('tags' , 'tags.id' , '=' , 'post_tag.tag_id')
+        ->where('tags.id' , '=' , $id)
+        ->select('posts.*')
+        ->get();
+
+        
+
+        return view("admin.posts.filter", compact("posts" ));
+
+
+    }
+
+
 }

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Auth::routes();
 
@@ -29,6 +29,7 @@ Route::middleware("auth")
     Route::get('/', 'HomeController@index')->name('index');    
     Route::resource("posts", "PostController");
     Route::resource("users" , "UserController");
+    Route::get("/posts/filter/{post}", "PostController@filter")->name("posts.filter");
   });
 
 
