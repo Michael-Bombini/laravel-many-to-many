@@ -29,11 +29,11 @@
                                     {{ $post['created_at'] }}
                                 </div>
                                 <div class="col-12 my-3">
-                                    TAGS of this post : <br>
+                                   <div class="mb-1">TAGS of this post : </div> <br>
                                     <ul>
                                         @foreach ($post->tags as $tag)
                                             <strong>
-                                                <li>
+                                                <li class="bg-primary d-inline-block px-2 py-1 rounded-pill">
                                                     {{ $tag->name }}
                                                 </li>
                                             </strong>
