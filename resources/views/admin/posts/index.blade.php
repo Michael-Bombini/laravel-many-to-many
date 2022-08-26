@@ -13,7 +13,7 @@
             @foreach ($posts as $post)
                 <div class="col-4">
                     <div class="post shadow h-100">
-                        <img src="{{ $post['image'] }}" class="img-fluid" alt="">
+                        <img src="{{ asset('/storage/' . $post['image']) }}" class="img-fluid" alt="">
                         <div class="p-3 mb-3">
                             <div class="title">
                                 {{ $post['title'] }}
@@ -29,12 +29,13 @@
                                     {{ $post['created_at'] }}
                                 </div>
                                 <div class="col-12 my-3">
-                                   <div class="mb-1">TAGS of this post : </div> <br>
+                                    <div class="mb-1">TAGS of this post : </div> <br>
                                     <ul>
                                         @foreach ($post->tags as $tag)
                                             <strong>
                                                 <li class="bg-primary d-inline-block px-2 py-1 rounded-pill">
-                                                   <a class="text-dark fw-bold" href="{{ route('admin.posts.filter', $tag->id)   }}"><strong>{{ $tag->name }}</strong></a> 
+                                                    <a class="text-dark fw-bold"
+                                                        href="{{ route('admin.posts.filter', $tag->id) }}"><strong>{{ $tag->name }}</strong></a>
                                                 </li>
                                             </strong>
                                         @endforeach

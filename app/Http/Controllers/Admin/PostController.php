@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -48,11 +49,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $img = $data['image'];
+        
 
         $newPost = new Post();
 
+        $storeFile = Storage::put("/post_images", $img); 
+
         $newPost->fill($data);
         $newPost->user_id = Auth::user()->id;
+        $newPost->image = $storeFile;
         $newPost->save();
 
         return redirect()->route("admin.posts.show", $newPost->id);
